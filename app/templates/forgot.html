@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Forgot password – Laundrix{% endblock %}
+{% block content %}<div class="container py-5" style="max-width:480px">
+<h1 class="h2 mb-4">Reset your password</h1>
+<form class="panel" data-auth="/auth/forgot" novalidate>
+  <div class="alert alert-danger d-none" data-alert role="alert"></div>
+  <div class="alert alert-success d-none" data-ok role="status"></div>
+  <div class="mb-4"><label class="form-label" for="email">Account email</label><input class="form-control" id="email" name="email" type="email" required></div>
+  <button class="btn btn-lx w-100" type="submit">Send reset link</button>
+  <p class="small mt-3 mb-0">We only send reset links by email. Laundrix never asks for your password or OTP on WhatsApp.</p>
+</form></div>{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}Profile – Laundrix{% endblock %}
+{% block content %}<div class="container py-5" style="max-width:640px"><h1 class="h2 mb-4">Your profile</h1>
+<form id="profile-form" class="panel mb-4" novalidate>
+  <div class="alert d-none" data-alert role="alert"></div>
+  <div class="mb-3"><label class="form-label" for="p-email">Email</label><input class="form-control" id="p-email" name="email" disabled></div>
+  <div class="mb-3"><label class="form-label" for="p-name">Full name</label><input class="form-control" id="p-name" name="full_name"></div>
+  <div class="mb-3"><label class="form-label" for="p-phone">Phone</label><input class="form-control" id="p-phone" name="phone" type="tel"></div>
+  <div class="mb-3"><label class="form-label" for="p-loc">Saved pickup location</label><input class="form-control" id="p-loc" name="saved_location" placeholder="e.g. Block C, Room 214"></div>
+  <div class="form-check form-switch mb-3"><input class="form-check-input" type="checkbox" id="p-notif" name="notifications_enabled"><label class="form-check-label" for="p-notif">Send me order notifications</label></div>
+  <button class="btn btn-lx" type="submit">Save profile</button></form>
+<form id="password-form" class="panel" novalidate>
+  <h2 class="h5">Change password</h2><div class="alert d-none" data-alert role="alert"></div>
+  <div class="mb-3"><label class="form-label" for="cp">Current password</label><input class="form-control" id="cp" name="current_password" type="password" autocomplete="current-password"></div>
+  <div class="mb-3"><label class="form-label" for="np">New password</label><input class="form-control" id="np" name="new_password" type="password" autocomplete="new-password"></div>
+  <button class="btn btn-lx" type="submit">Change password</button></form>
+<a href="/dashboard" class="d-inline-block mt-3">View order history on your dashboard</a></div>{% endblock %}

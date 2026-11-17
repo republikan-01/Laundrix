@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Admin – Laundrix{% endblock %}
+{% block content %}<div class="container py-4">
+<h1 class="h2 mb-3">Admin dashboard</h1>
+<div class="row g-3 mb-4" id="stats"></div>
+<ul class="nav nav-pills mb-3" id="tabs">
+  {% for k,l in [('orders','Orders'),('customers','Customers'),('payments','Payments'),('services','Services and prices'),('staff','Delivery staff'),('complaints','Complaints'),('analytics','Analytics'),('promotions','Discount codes'),('refunds','Refunds'),('reviews','Reviews')] %}
+  <li class="nav-item"><button class="nav-link" data-tab="{{ k }}">{{ l }}</button></li>{% endfor %}
+</ul>
+<div class="alert d-none" id="admin-msg" role="status"></div>
+<div id="tab-body" class="panel table-responsive"></div></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/admin.js') }}"></script>{% endblock %}

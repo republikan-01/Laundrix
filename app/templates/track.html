@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Track {{ booking.reference }} – Laundrix{% endblock %}
+{% block content %}<div class="container py-5" style="max-width:560px">
+<h1 class="h2 mb-1">Order {{ booking.reference }}</h1><p class="mb-4">This page updates by itself.</p>
+<div class="panel"><ol class="timeline" id="timeline" data-booking="{{ booking.id }}"><li>Loading…</li></ol></div><div class="panel mt-3"><h2 class="h5">Rider live location</h2><p class="small text-muted" id="rider-location-note">Location appears when your delivery rider shares it.</p><div id="rider-map" style="height:280px;border-radius:12px;display:none"></div></div>
+<a class="btn btn-outline-lx mt-3" href="/dashboard">Back to dashboard</a></div>{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Create account – Laundrix{% endblock %}
+{% block content %}<div class="container py-5" style="max-width:480px">
+<h1 class="h2 mb-4">Create your account</h1>
+<form class="panel" data-auth="/auth/register" novalidate>
+  <div class="alert alert-danger d-none" data-alert role="alert"></div>
+  <div class="mb-3"><label class="form-label" for="full_name">Full name</label><input class="form-control" id="full_name" name="full_name" autocomplete="name" required></div>
+  <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control" id="email" name="email" type="email" autocomplete="email" required></div>
+  <div class="mb-3"><label class="form-label" for="phone">Phone number</label><input class="form-control" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="08012345678" required></div>
+  <div class="mb-3"><label class="form-label" for="customer_type">I am a</label><select class="form-select" id="customer_type" name="customer_type"><option value="">Choose one</option><option value="student">Student</option><option value="lecturer">Lecturer</option><option value="staff">Non-academic staff</option></select></div>
+  <div class="mb-4"><label class="form-label" for="password">Password</label><input class="form-control" id="password" name="password" type="password" autocomplete="new-password" required><div class="form-text">At least 8 characters with letters and numbers.</div></div>
+  <button class="btn btn-lx w-100" type="submit">Create account</button>
+  <p class="mt-3 mb-0 text-center">Already registered? <a href="/login">Log in</a></p>
+</form></div>{% endblock %}

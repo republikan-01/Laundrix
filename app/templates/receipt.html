@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}Receipt {{ booking.reference }} – Laundrix{% endblock %}
+{% block content %}<div class="container py-5" style="max-width:600px"><div class="panel" id="receipt">
+<h1 class="h3">Payment receipt</h1>
+<p class="mb-3">Laundrix · Laundry Made Easy</p>
+<div class="price-row"><span>Booking</span><strong>{{ booking.reference }}</strong></div>
+<div class="price-row"><span>Payment reference</span><strong>{{ payment.reference }}</strong></div>
+<div class="price-row"><span>Customer</span><span>{{ booking.customer.full_name }}</span></div>
+<div class="price-row"><span>Paid on</span><span>{{ payment.paid_at.strftime('%d %b %Y, %H:%M') }} UTC</span></div>
+{% for i in booking.items %}<div class="price-row"><span>{{ i.service.name }} × {{ '%g'|format(i.quantity) }}</span><span>₦{{ '{:,.2f}'.format(i.unit_price * i.quantity) }}</span></div>{% endfor %}
+<div class="price-row fs-5"><strong>Total paid</strong><strong>₦{{ '{:,.2f}'.format(payment.amount) }}</strong></div>
+</div><button class="btn btn-lx mt-3" onclick="window.print()">Print or save as PDF</button>
+<a class="btn btn-outline-lx mt-3" href="/dashboard">Back</a></div>{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}New password – Laundrix{% endblock %}
+{% block content %}<div class="container py-5" style="max-width:480px">
+<h1 class="h2 mb-4">Choose a new password</h1>
+<form class="panel" data-auth="/auth/reset" novalidate>
+  <div class="alert alert-danger d-none" data-alert role="alert"></div>
+  <input type="hidden" name="token" value="{{ token }}">
+  <div class="mb-4"><label class="form-label" for="password">New password</label><input class="form-control" id="password" name="password" type="password" autocomplete="new-password"><div class="form-text">At least 8 characters with letters and numbers.</div></div>
+  <button class="btn btn-lx w-100" type="submit">Save new password</button>
+</form></div>{% endblock %}

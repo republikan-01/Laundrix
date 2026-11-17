@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon, logo %}
+{% block title %}Laundrix – Campus Laundry Pickup & Delivery{% endblock %}
+{% block content %}
+{% set art = {'Wash & Fold':'shirt','Wash & Iron':'iron','Ironing Only':'hanger','Bedding & Duvets':'bed','Dry Cleaning':'sparkles'} %}
+{% set files = {'Wash & Fold':'wash-fold','Wash & Iron':'wash-iron','Ironing Only':'ironing','Bedding & Duvets':'bedding','Dry Cleaning':'dry-cleaning'} %}
+{% set alts = {'Wash & Fold':'Freshly washed clothes and towels folded on a table','Wash & Iron':'Ironed shirts hanging beside a steam iron','Ironing Only':'A pressed shirt on an ironing board','Bedding & Duvets':'Fresh white bedding and pillows','Dry Cleaning':'Clean suits hanging in a garment care facility'} %}
+{% set blurbs = {'Wash & Fold':'Everyday clothes washed, dried and folded.','Wash & Iron':'Washed, dried and pressed, ready to wear.','Ironing Only':'Already clean? We press and return them crisp.','Bedding & Duvets':'Sheets, duvets and blankets, washed fresh.','Dry Cleaning':'Careful cleaning for suits and delicate wear.'} %}
+{% set hero = photo('hero-laundry') %}
+
+<section class="lx-hero"><div class="lx-wrap lx-hero-grid">
+  <div>
+    <p class="lx-label">Campus laundry pickup &amp; delivery</p>
+    <h1>Fresh Clothes. More Time for What Matters.</h1>
+    <p class="lx-lead">Your campus laundry, handled with care. We pick up, wash and deliver straight to your doorstep.</p>
+    <div class="lx-actions">
+      <a class="lx-btn lx-btn-primary" href="/book">Book Laundry</a>
+      <a class="lx-btn lx-btn-outline" href="https://wa.me/{{ whatsapp_number }}?text=Hi%20Laundrix%2C%20I%27d%20like%20to%20book%20a%20pickup" target="_blank" rel="noopener">{{ icon('message-circle', 18) }} Chat on WhatsApp</a>
+    </div>
+    <ul class="lx-trust">
+      <li>{{ icon('map-pin', 18) }} Hostel pickup</li><li>{{ icon('lock', 18) }} Secure payments</li><li>{{ icon('truck', 18) }} Reliable delivery</li>
+    </ul>
+  </div>
+  {% if hero %}
+  <figure class="lx-hero-photo"><img src="{{ hero }}" alt="Folded fresh towels and clothes in a laundry basket" width="1200" height="750" fetchpriority="high" decoding="async" onerror="this.closest('figure').remove()"></figure>
+  {% else %}
+  <aside class="lx-pricelist" aria-label="Price list"><h2>Price list</h2>
+    {% for s in services %}<div class="lx-pl-row"><span>{{ s.name }}</span><strong>₦{{ '{:,.0f}'.format(s.price) }}<small>/{{ s.unit }}</small></strong></div>{% endfor %}
+    <a class="lx-btn lx-btn-soft" href="/book">Start a booking</a></aside>
+  {% endif %}
+</div></section>
+
+<section class="lx-section" id="services"><div class="lx-wrap">
+  <div class="lx-head"><h2>Services and pricing</h2><p>Simple prices. Your total is shown before you pay.</p></div>
+  <div class="lx-cards" id="pricing">
+    {% for s in services %}{% set ph = photo(files.get(s.name, '')) if files.get(s.name) else None %}
+    <article class="lx-card">
+      <div class="lx-media">{{ icon(art.get(s.name, 'shirt'), 28) }}{% if ph %}<img src="{{ ph }}" alt="{{ alts.get(s.name, s.name) }}" width="600" height="400" loading="lazy" decoding="async" onerror="this.remove()">{% endif %}</div>
+      <div class="lx-card-body">
+        <h3>{{ s.name }}</h3>
+        <p>{{ blurbs.get(s.name, s.description) }}</p>
+        <div class="lx-card-foot"><div class="lx-price">₦{{ '{:,.0f}'.format(s.price) }}<small>/{{ s.unit }}</small></div><a class="lx-btn lx-btn-soft lx-btn-sm" href="/book?service={{ s.id }}">Book</a></div>
+      </div>
+    </article>
+    {% else %}<p class="lx-empty">Services will appear here once they are added.</p>{% endfor %}
+  </div>
+</div></section>
+
+<section class="lx-section lx-alt" id="how-it-works"><div class="lx-wrap">
+  <div class="lx-head"><h2>How it works</h2><p>From your hostel door to clean clothes back in your hands.</p></div>
+  <ol class="lx-steps">
+    {% for ic, title, text in [('calendar','Book your laundry','Choose services, set a pickup time and pay securely.'),('truck','We pick it up','Our rider collects from your hostel or office.'),('droplet','We wash and prepare it','Washed, pressed and folded with care.'),('home','We deliver it','Clean clothes back at your door. Track every step.')] %}
+    <li class="lx-step"><span class="lx-step-ic">{{ icon(ic, 22) }}</span><div><small>Step {{ loop.index }}</small><h3>{{ title }}</h3><p>{{ text }}</p></div></li>
+    {% endfor %}
+  </ol>
+</div></section>
+
+<section class="lx-section"><div class="lx-wrap">
+  <div class="lx-head"><h2>Why choose Laundrix</h2><p>Built around campus life, so laundry stops being a chore.</p></div>
+  <div class="lx-why">
+    {% for ic, title, text in [('truck','Convenient hostel pickup','Hostels, staff quarters and faculty buildings.'),('calendar','Flexible scheduling','Pick the pickup time and delivery date that suit you.'),('shield-check','Secure payments','Pay with Paystack. Card details never touch our servers.'),('sparkles','Professional laundry care','Washed, pressed and folded properly, then returned neat.'),('map-pin','Easy order tracking','Follow your order from pickup to delivery.'),('message-circle','WhatsApp support','Chat with us any time. We never ask for your password or OTP.')] %}
+    <div class="lx-why-card"><span class="lx-why-ic">{{ icon(ic, 22) }}</span><div><h3>{{ title }}</h3><p>{{ text }}</p></div></div>
+    {% endfor %}
+  </div>
+</div></section>
+
+<section class="lx-cta"><div class="lx-wrap">
+  <h2>Ready to make laundry easier?</h2>
+  <p>Book a pickup in about two minutes.</p>
+  <a class="lx-btn lx-btn-light" href="/book">Book Your Laundry</a>
+</div></section>
+{% endblock %}
+
+{% block footer %}
+<footer class="lx-footer" id="contact"><div class="lx-wrap">
+  <div class="lx-foot-grid">
+    <div class="lx-foot-brand"><a class="lx-logo lx-logo-light" href="/">{{ logo(30) }}<span>Laundrix</span></a><p>Laundry Made Easy. Campus pickup and delivery for students, lecturers and staff.</p></div>
+    <div><h4>Quick links</h4><ul><li><a href="/#services">Services</a></li><li><a href="/#how-it-works">How it works</a></li><li><a href="/login">Log in</a></li><li><a href="/register">Create account</a></li></ul></div>
+    <div><h4>Services</h4><ul>{% for s in services %}<li><a href="/#services">{{ s.name }}</a></li>{% endfor %}</ul></div>
+    <div class="lx-foot-contact"><h4>Contact</h4><ul><li><a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">{{ icon('message-circle', 16) }} WhatsApp +{{ whatsapp_number }}</a></li><li><span>{{ icon('map-pin', 16) }} Hostels, staff quarters and faculty buildings</span></li></ul></div>
+  </div>
+  <div class="lx-foot-bottom"><span>© {{ year }} Laundrix</span><span>{{ icon('lock', 14) }} Payments secured by Paystack. We never store card details.</span></div>
+</div></footer>
+{% endblock %}

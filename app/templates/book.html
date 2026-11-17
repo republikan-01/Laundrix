@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% block title %}Book laundry – Laundrix{% endblock %}
+{% block bodyclass %}no-fab{% endblock %}
+{% block content %}<div class="container bk" style="max-width:720px">
+<h1 class="bk-title">Book a pickup</h1>
+<form id="book-form" novalidate>
+  <div class="alert alert-danger d-none" data-alert role="alert"></div>
+  <section class="bk-sec"><h2>1. Choose services</h2><p class="bk-hint">Tap a service. Then set the weight in kg or the number of items.</p>
+    <div id="svc-rows"><p class="bk-hint">Loading services…</p></div><div id="items-error" class="bk-err" role="alert"></div></section>
+  <section class="bk-sec"><h2>2. Where should we collect?</h2>
+    <div class="chips" id="loc-options" data-field="pickup_location" role="radiogroup" aria-label="Pickup location"></div>
+    <label class="bk-label" for="building_details">Hostel or building, and room</label>
+    <input class="form-control" id="building_details" name="building_details" placeholder="e.g. Block C, Room 214" autocomplete="off"></section>
+  <section class="bk-sec"><h2>3. When?</h2>
+    <div class="bk-grid two">
+      <div><label class="bk-label" for="pickup_date">Pickup date</label><input class="form-control" id="pickup_date" name="pickup_date" type="date"></div>
+      <div><label class="bk-label" for="pickup_time">Pickup time</label><input class="form-control" id="pickup_time" name="pickup_time" type="time"></div>
+    </div>
+    <label class="bk-label" for="delivery_date">Preferred delivery date</label><input class="form-control" id="delivery_date" name="delivery_date" type="date">
+    <label class="bk-label" for="instructions">Special instructions (optional)</label><textarea class="form-control" id="instructions" name="instructions" rows="2" maxlength="500" placeholder="e.g. Please call when you arrive"></textarea></section>
+  <section class="bk-sec"><h2>Discount code (optional)</h2><input class="form-control" name="discount_code" id="discount_code" placeholder="Enter promo code"></section>
+  <section class="bk-sec"><h2>Order summary</h2><div id="summary" class="bk-summary"><p class="mb-0">Select a service to see your total.</p></div></section>
+  <div class="bk-bar"><div class="bk-total"><small>Estimated total</small><strong id="total">₦0</strong></div><button class="btn btn-lx btn-lg" type="submit">Confirm booking</button></div>
+</form>
+<div id="confirmation" class="panel d-none text-center">
+  <h2 class="h3">Booking received</h2>
+  <p>Your reference is <span class="status" id="confirm-ref"></span>. Estimated total: <strong id="confirm-total"></strong>.</p>
+  <p class="small">Pay now to confirm your pickup. Unpaid bookings stay pending.</p>
+  <button id="pay-now" class="btn btn-lx w-100 mb-2">Pay with Paystack</button>
+  <a class="btn btn-outline-lx w-100" href="/dashboard">Pay later</a>
+  <div class="text-danger small mt-2" data-pay-error></div>
+</div></div>{% endblock %}
